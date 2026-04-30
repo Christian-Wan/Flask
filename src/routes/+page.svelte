@@ -109,6 +109,8 @@
 	let shakeTimeThreshold = 600;
 	let isShaking = false;
 
+	let yOrientation = 0;
+
 	const requestPermission = async () => {
 		if (!browser) return;
 
@@ -198,8 +200,10 @@
 			const gx = sinGamma * cosBeta;
 			const gy = -sinBeta;
 
+			yOrientation = Math.max(-1, Math.min(1, gy));
+
 			gravity.x = MAX_GRAVITY * Math.max(-1, Math.min(1, gx));
-			gravity.y = MAX_GRAVITY * Math.max(-1, Math.min(1, gy));
+			gravity.y = MAX_GRAVITY * yOrientation;
 		}
 	};
 
@@ -229,8 +233,12 @@
 	});
 
 	const onShake = (magnitude: number) => {
-		gravity.x = Math.random() * magnitude * magnitude * 40 - magnitude * magnitude;
-		gravity.y = Math.random() * magnitude * magnitude * 40 - magnitude * magnitude;
+		gravity.x = Math.min(MAX_GRAVITY, magnitude * magnitude);
+		gravity.y = Math.min(MAX_GRAVITY, magnitude * magnitude) * yOrientation;
+
+		if (Math.random() < 0.5) {
+			gravity.x *= -1;
+		}
 	};
 </script>
 
