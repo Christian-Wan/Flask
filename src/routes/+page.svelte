@@ -169,8 +169,8 @@
 		const currentTime = Date.now();
 
 		// Check if shake threshold is exceeded and enough time has passed
-		if (totalDelta > shakeThreshold && currentTime - lastShakeTime > shakeTimeThreshold) {
-			onShake();
+		if (totalDelta > shakeThreshold) {
+			onShake(totalDelta);
 			lastShakeTime = currentTime;
 		}
 
@@ -223,7 +223,21 @@
 		}
 	});
 
-	const onShake = () => {};
+	const onShake = (magnitude: number) => {
+		allowTopExit = false;
+		if (gravity.x < 0) {
+			gravity.x = Math.min(Math.random() * magnitude, MAX_GRAVITY);
+		}
+		else {
+			gravity.x = Math.min(Math.random() * magnitude, MAX_GRAVITY) * -1;
+		}
+		if (gravity.y < 0) {
+			gravity.y = Math.min(Math.random() * magnitude, MAX_GRAVITY);
+		}
+		else {
+			gravity.y = Math.min(Math.random() * magnitude, MAX_GRAVITY) * -1;
+		}
+	};
 </script>
 
 <div
