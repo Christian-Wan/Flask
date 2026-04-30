@@ -107,6 +107,7 @@
 	let lastAcceleration = { x: 0, y: 0, z: 0 };
 	let shakeThreshold = 15;
 	let shakeTimeThreshold = 600;
+	let isShaking = false;
 
 	const requestPermission = async () => {
 		if (!browser) return;
@@ -172,6 +173,10 @@
 		if (totalDelta > shakeThreshold) {
 			onShake(totalDelta);
 			lastShakeTime = currentTime;
+			isShaking = true;
+		}
+		else {
+			isShaking = false;
 		}
 
 		// Update last acceleration values
@@ -179,7 +184,7 @@
 	};
 
 	const onOrientationChange = (event: DeviceOrientationEvent) => {
-		if (event.beta !== null && event.gamma !== null) {
+		if (event.beta !== null && event.gamma !== null && !isShaking) {
 			const beta = event.beta;
 			const gamma = event.gamma;
 
