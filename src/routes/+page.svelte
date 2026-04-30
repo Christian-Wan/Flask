@@ -224,19 +224,8 @@
 	});
 
 	const onShake = (magnitude: number) => {
-		allowTopExit = false;
-		if (gravity.x < 0) {
-			gravity.x = Math.min(Math.random() * magnitude, MAX_GRAVITY);
-		}
-		else {
-			gravity.x = Math.min(Math.random() * magnitude, MAX_GRAVITY) * -1;
-		}
-		if (gravity.y < 0) {
-			gravity.y = Math.min(Math.random() * magnitude, MAX_GRAVITY);
-		}
-		else {
-			gravity.y = Math.min(Math.random() * magnitude, MAX_GRAVITY) * -1;
-		}
+		gravity.x = Math.random() * magnitude * 2 - magnitude;
+		gravity.y = Math.random() * magnitude * 2 - magnitude;
 	};
 </script>
 
