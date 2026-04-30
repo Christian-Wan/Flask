@@ -233,8 +233,8 @@
 	});
 
 	const onShake = (magnitude: number) => {
-		gravity.x = Math.min(MAX_GRAVITY, magnitude * magnitude);
-		gravity.y = Math.min(MAX_GRAVITY, magnitude * magnitude) * yOrientation;
+		gravity.x = Math.min(MAX_GRAVITY * 10, magnitude * magnitude);
+		gravity.y = Math.min(MAX_GRAVITY * 10, magnitude * magnitude) * yOrientation;
 
 		if (Math.random() < 0.5) {
 			gravity.x *= -1;
