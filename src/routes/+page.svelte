@@ -224,8 +224,8 @@
 	});
 
 	const onShake = (magnitude: number) => {
-		gravity.x = Math.random() * magnitude * 2 - magnitude;
-		gravity.y = Math.random() * magnitude * 2 - magnitude;
+		gravity.x = Math.random() * magnitude * magnitude * 4 - magnitude * magnitude;
+		gravity.y = Math.random() * magnitude * magnitude * 4 - magnitude * magnitude;
 	};
 </script>
 
